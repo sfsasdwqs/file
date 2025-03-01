@@ -1,0 +1,77 @@
+package com.common.szair.model.alilogin;
+
+import com.common.szair.model.soap.SOAPBinding;
+import com.common.szair.model.soap.SOAPObject;
+import com.common.szair.model.soap.UnknownSOAPObject;
+import java.io.IOException;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
+/* loaded from: C:\Users\桥\Desktop\python\xiuhao\classes3.dex */
+public class alipayIdentifyResponse implements SOAPObject {
+    public alipayIdentifyRespVO _ALIPAY_IDENTIFY_RESULT = null;
+    private Exception _exception = null;
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void addAttributesToNode(XmlSerializer xml) throws IOException {
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public String getNamespace() {
+        return "http://com/szcares/member/webservice/userinfoShare";
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void setexception(Exception _exception) {
+        this._exception = _exception;
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public Exception getexception() {
+        return this._exception;
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void toXml(XmlSerializer xml, String name, String namespace) throws IOException {
+        if (namespace == null || namespace.length() <= 0) {
+            namespace = getNamespace();
+        }
+        xml.startTag(namespace, name);
+        addAttributesToNode(xml);
+        addElementsToNode(xml);
+        xml.endTag(namespace, name);
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void addElementsToNode(XmlSerializer xml) throws IOException {
+        if (this._ALIPAY_IDENTIFY_RESULT != null) {
+            xml.startTag(null, "ALIPAY_IDENTIFY_RESULT");
+            this._ALIPAY_IDENTIFY_RESULT.addElementsToNode(xml);
+            xml.endTag(null, "ALIPAY_IDENTIFY_RESULT");
+        }
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void parse(SOAPBinding binding, XmlPullParser parser) {
+        try {
+            int next = parser.next();
+            while (next != 3) {
+                if (next == 2) {
+                    if ("ALIPAY_IDENTIFY_RESULT".equals(parser.getName())) {
+                        alipayIdentifyRespVO alipayidentifyrespvo = new alipayIdentifyRespVO();
+                        alipayidentifyrespvo.parse(binding, parser);
+                        this._ALIPAY_IDENTIFY_RESULT = alipayidentifyrespvo;
+                    } else {
+                        new UnknownSOAPObject().parse(binding, parser);
+                    }
+                }
+                next = parser.next();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e2) {
+            e2.printStackTrace();
+        }
+    }
+}
