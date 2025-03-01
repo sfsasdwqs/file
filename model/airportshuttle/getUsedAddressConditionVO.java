@@ -1,0 +1,99 @@
+package com.common.szair.model.airportshuttle;
+
+import com.common.szair.model.soap.SOAPBinding;
+import com.common.szair.model.soap.SOAPObject;
+import com.common.szair.model.soap.UnknownSOAPObject;
+import java.io.IOException;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
+/* loaded from: C:\Users\桥\Desktop\python\xiuhao\classes3.dex */
+public class getUsedAddressConditionVO implements SOAPObject {
+    public String _CITY_NAME = null;
+    public String _PAGE_COUNT = null;
+    public String _PAGE_INDEX = null;
+    public String _USER_ID = null;
+    private Exception _exception = null;
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void addAttributesToNode(XmlSerializer xml) throws IOException {
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public String getNamespace() {
+        return "http://com/shenzhenair/mobilewebservice/pickup";
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void setexception(Exception _exception) {
+        this._exception = _exception;
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public Exception getexception() {
+        return this._exception;
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void toXml(XmlSerializer xml, String name, String namespace) throws IOException {
+        if (namespace == null || namespace.length() <= 0) {
+            namespace = getNamespace();
+        }
+        xml.startTag(namespace, name);
+        addAttributesToNode(xml);
+        addElementsToNode(xml);
+        xml.endTag(namespace, name);
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void addElementsToNode(XmlSerializer xml) throws IOException {
+        if (this._CITY_NAME != null) {
+            xml.startTag(null, "CITY_NAME");
+            xml.text(this._CITY_NAME);
+            xml.endTag(null, "CITY_NAME");
+        }
+        if (this._PAGE_COUNT != null) {
+            xml.startTag(null, "PAGE_COUNT");
+            xml.text(this._PAGE_COUNT);
+            xml.endTag(null, "PAGE_COUNT");
+        }
+        if (this._PAGE_INDEX != null) {
+            xml.startTag(null, "PAGE_INDEX");
+            xml.text(this._PAGE_INDEX);
+            xml.endTag(null, "PAGE_INDEX");
+        }
+        if (this._USER_ID != null) {
+            xml.startTag(null, "USER_ID");
+            xml.text(this._USER_ID);
+            xml.endTag(null, "USER_ID");
+        }
+    }
+
+    @Override // com.common.szair.model.soap.SOAPObject
+    public void parse(SOAPBinding binding, XmlPullParser parser) {
+        try {
+            int next = parser.next();
+            while (next != 3) {
+                if (next == 2) {
+                    if ("CITY_NAME".equals(parser.getName())) {
+                        this._CITY_NAME = parser.nextText();
+                    } else if ("PAGE_COUNT".equals(parser.getName())) {
+                        this._PAGE_COUNT = parser.nextText();
+                    } else if ("PAGE_INDEX".equals(parser.getName())) {
+                        this._PAGE_INDEX = parser.nextText();
+                    } else if ("USER_ID".equals(parser.getName())) {
+                        this._USER_ID = parser.nextText();
+                    } else {
+                        new UnknownSOAPObject().parse(binding, parser);
+                    }
+                }
+                next = parser.next();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e2) {
+            e2.printStackTrace();
+        }
+    }
+}
